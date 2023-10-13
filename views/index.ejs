@@ -1,0 +1,58 @@
+<%- include('partials/head') %>
+
+    <div class="container-fluid border border-dark rounded-3 main">
+        <div class="row mt-5 mb-3 text-center">
+            <div class="col">
+                <% let options={ weekday: 'long' , year: 'numeric' , month: 'long' , day: 'numeric' }; %>
+                    <% let today=new Date(); %>
+                        <% let day=today.toLocaleDateString("en-US", options); %>
+                            <h1 class="color-1">
+                                <%= day %>
+                            </h1>
+            </div>
+        </div>
+
+        <div class="row my-3 text-center">
+            <div class="col">
+                <h2 class="color-2 head-text">To-Do List</h2>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <ul>
+                <% for(i of items) { %>
+
+                    <div class="col mx-auto px-4 py-3 show-item rounded-3">
+                        <li class="color-2 text">
+                            <%= `${i.count}.` %>
+                                <span class="ms-2">
+                                    <%= i.item %>
+                                </span>
+                        </li>
+                        <form method="POST" action="/<%= i.id %>?_method=DELETE">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                        </form>
+                    </div>
+                    <br>
+                    <% } %>
+            </ul>
+        </div>
+
+        <br><br>
+        <form action="/" method="POST">
+            <div class="row mx-5 mb-5">
+
+                <div class="col add-item">
+                    <label for="item" class="col-form-label text color-2">Enter Item:</label>
+                    <input type="text" name="item" id="item" class="form-control form-input" autocomplete="off"
+                        placeholder="New Item">
+                    <button type="submit" class="btn btn-primary">ADD</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    </body>
+
+    </html>
+    <!-- items.push({ id: (items.length + 1), item }); -->
